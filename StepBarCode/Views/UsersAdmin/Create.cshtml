@@ -1,0 +1,58 @@
+﻿@model StepBarCode.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container">
+    @*<h2>@ViewBag.Title.</h2>*@<br />
+
+    @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>创建一个新用户</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-error" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="UserName">用户名</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Password">密码</label>
+            <div class="col-md-4">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ConfirmPassword">确认密码</label>
+            <div class="col-md-4">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                选择用户权限
+            </label>
+            <div class="col-md-6">
+                @foreach (var item in (SelectList)ViewBag.RoleId)
+                {
+                    <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                    @Html.Label(item.Value, new { @class = "control-label" })
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" class="btn btn-primary" value="创建" />
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("返回列表", "Index")
+    </div>
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
