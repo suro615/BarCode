@@ -1,0 +1,47 @@
+﻿@model StepBarCode.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
+
+<div class="container">
+    @*<h2>查看</h2>*@<br />
+
+    <div>
+        <h4>用户详情</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @*@Html.DisplayNameFor(model => model.UserName)*@用户名
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+        </dl>
+    </div>
+    <h4>用户所在的权限组：</h4>
+    @if (ViewBag.RoleNames.Count == 0)
+    {
+        <hr />
+        <p>未发现用户所属的权限组</p>
+    }
+
+    <h4>
+        @foreach (var item in ViewBag.RoleNames)
+        {
+            <span class="label label-primary" style="font-size:medium">@item</span>
+        }
+    </h4>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <p>
+
+        @if (Model.Id != User.Identity.GetUserId())
+        {
+            @Html.ActionLink("删除", "Delete", new { id = Model.Id },new {@class="btn btn-outline btn-sm"})
+        }
+        @Html.ActionLink("编辑", "Edit", new { id = Model.Id },new {@class="btn btn-outline btn-sm"}) 
+        &nbsp;&nbsp;@Html.ActionLink("返回列表", "Index")
+    </p>
+</div>
+

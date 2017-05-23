@@ -1,0 +1,44 @@
+﻿@model StepBarCode.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div class="col-md-4 col-md-offset-4">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "m-t", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>请登录</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <input class="form-control" data-val="true" data-val-required="用户名是必需的。" id="UserName" name="UserName" placeholder="用户名" type="text" value="" />
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input class="form-control" data-val="true" data-val-required="密码是必需的。" id="Password" name="Password" placeholder="密码" type="password" />
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+                            <input data-val="true" data-val-required="Remember me? 字段是必需的。" id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" /><i></i> 记住我 ?
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="登  录" class="btn btn-outline btn-lg btn-block" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
