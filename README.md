@@ -1,2 +1,3 @@
 # BarCode
 Test use github
+ok ,let's do something...
