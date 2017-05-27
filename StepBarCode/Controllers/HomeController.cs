@@ -22,6 +22,11 @@ namespace StepBarCode.Controllers
             ViewBag.TestD = "About";
             return View();
         }
+        public ActionResult Help()
+        {
+            ViewBag.TestD = "Help";
+            return View();
+        }
 
         public JsonResult GetCompany()
         {
